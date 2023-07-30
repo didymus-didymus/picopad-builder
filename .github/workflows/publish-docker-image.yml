@@ -1,4 +1,4 @@
-name: Publsh  Image to DockerHub
+name: Publsh Image to DockerHub
 
 on:
   push:
