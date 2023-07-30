@@ -2,7 +2,7 @@
 FROM ubuntu:22.04
 
 LABEL maintainer="didymus@tuta.io"
-LABEL version="0.2"
+LABEL version="1.0"
 LABEL description="Image for compiling PicoPad binaries"
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -49,6 +49,5 @@ RUN cd /home/picoPad/ \
     && mkdir -p /home/picoPad/picopad-playground/picopad-sdk/assets/ \
 # building MakeFile
     && cmake .
-
 
 WORKDIR /home/picoPad/picopad-playground/picopad-sdk/picopad-gb/
