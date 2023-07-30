@@ -11,6 +11,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+ENV PICO_SDK_PATH=/home/picoPad/pico-sdk/
+ENV PICOPAD_BASE_PATH=/home/picoPad/picopad-playground/picopad-sdk/picopad-base/
 
 # install packages
 RUN apt-get update \
@@ -32,6 +34,7 @@ RUN mkdir -p /home/picoPad/temp/ \
 # Get SDK sources
 RUN cd /home/picoPad/ \
     && git clone https://github.com/raspberrypi/pico-sdk.git --branch master \
+    && git clone https://github.com/didymus-didymus/picopad-builder-tools.git --branch main \
     && cd /home/picoPad/pico-sdk/ \
     && git submodule update --init \
     && cd .. \
@@ -44,9 +47,8 @@ RUN cd /home/picoPad/ \
     && cd /home/picoPad/picopad-playground/picopad-sdk/picopad-gb/ \
     && sed -i s,set\(PICO,set\(X-PICO,g CMakeLists.txt \
     && mkdir -p /home/picoPad/picopad-playground/picopad-sdk/assets/ \
-    && echo '----- END -----'
+# building MakeFile
+    && cmake .
 
-ENV PICO_SDK_PATH=/home/picoPad/pico-sdk/
-ENV PICOPAD_BASE_PATH=/home/picoPad/picopad-playground/picopad-sdk/picopad-base/
 
 WORKDIR /home/picoPad/picopad-playground/picopad-sdk/picopad-gb/
