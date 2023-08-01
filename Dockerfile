@@ -31,6 +31,9 @@ RUN mkdir -p /home/picoPad/temp/ \
     && ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake \
     && rm -rf /home/picoPad/temp/*
 
+# break cache to get fresh GIT clone
+ARG BUILD_NUMBER_CACHE_BREAKER=0
+
 # Get SDK sources
 RUN cd /home/picoPad/ \
     && git clone https://github.com/raspberrypi/pico-sdk.git --branch master \
@@ -41,9 +44,8 @@ RUN cd /home/picoPad/ \
     && git clone https://github.com/raspberrypi/pico-examples.git --branch master \
     && git clone https://github.com/tvecera/picopad-playground.git --branch main \
     && cd /home/picoPad/picopad-playground/ \
-# workarounds    
-    && sed -i s,git@github.com:,https://github.com/,g .gitmodules \
     && git submodule update --init \
+# workarounds    
     && cd /home/picoPad/picopad-playground/picopad-sdk/picopad-gb/ \
     && sed -i s,set\(PICO,set\(X-PICO,g CMakeLists.txt \
     && mkdir -p /home/picoPad/picopad-playground/picopad-sdk/assets/ \
