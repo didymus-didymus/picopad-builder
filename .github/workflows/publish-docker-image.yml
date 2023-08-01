@@ -16,10 +16,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push Dockerfile
         uses: docker/build-push-action@v4
-        build-args: |
-          BUILD_NUMBER_CACHE_BREAKER=${{ github.run_number }}
         with:
           context: .
+          build-args: |
+            BUILD_NUMBER_CACHE_BREAKER=${{ github.run_number }}
           push: true
           tags: didymusdidymus/picopad-builder:latest, didymusdidymus/picopad-builder:${{ github.run_number }}
       - name: Build and push Dockerfile-autorun
