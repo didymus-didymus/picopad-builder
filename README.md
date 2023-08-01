@@ -4,7 +4,7 @@ This Docker container definitions aims to prepare working environment with Picop
 
 It handles all prerequisites for building, so only prerequisity for it is to have running Docker service supporting Linux sontainers.
 
-## [Basic container](.)
+## [Basic container](./Dockerfile)
 
 The basic [Dockerfile](./Dockerfile) contains full SDK environment to run builds. Also contains preinstalled Midnight Commander and VIM editor.
 You can start it and attach to it for example using [VS Code](https://code.visualstudio.com/docs/devcontainers/attach-container).
@@ -22,7 +22,7 @@ docker run -it didymusdidymus/picopad-builder:latest
 
 ## [Autorun container](./autorun/Dockerfile)
 
-This container is intendede to convert multiple GB files easily in one batch.
+This container is intendet to convert multiple GB files easily in one batch.
 
 Again the image is avalable using [Docker Hub](https://hub.docker.com/r/didymusdidymus/picopad-builder-autorun), so you don't need to build it, you can simply download it:
 
