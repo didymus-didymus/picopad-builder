@@ -44,12 +44,12 @@ RUN cd /home/picoPad/ \
     && git clone https://github.com/raspberrypi/pico-examples.git --branch master \
     && git clone https://github.com/tvecera/picopad-playground.git --branch main \
     && cd /home/picoPad/picopad-playground/ \
-    && git submodule update --init \
-# workarounds    
-    && cd /home/picoPad/picopad-playground/picopad-sdk/picopad-gb/ \
-    && sed -i s,set\(PICO,set\(X-PICO,g CMakeLists.txt \
-    && mkdir -p /home/picoPad/picopad-playground/picopad-sdk/assets/ \
-# building MakeFile
+    && git submodule update --init
+
+RUN sh /home/picoPad/picopad-builder-tools/PatchWorkarounds.sh \
+    && cd /home/picoPad/picopad-playground/picopad-sdk/picopad-gbc/ \
+    && cmake . \
+    && cd ../picopad-gb/ \
     && cmake .
 
 WORKDIR /home/picoPad/picopad-playground/picopad-sdk/picopad-gb/
